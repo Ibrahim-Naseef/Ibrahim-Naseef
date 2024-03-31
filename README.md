@@ -5,7 +5,7 @@
 
 
 # 💫 About Me:
-🔭 I’m currently working on React JS<br>🤝 I’m looking for help with<br>🌱 I’m currently learning AWS<br>💬 Ask me about Web, Python, Java<br>⚡ Fun fact Bugs are part of life.
+🔭 I’m currently working on Dental X-Ray Age Prediction using Deep Learning<br>🤝 I’m looking for help with Java Fullstack<br>🌱 I’m currently learning MERN stack<br>💬 Ask me about Web, Python, Java<br>⚡ Fun fact: Bugs are part of life.
 
 
 ## 🌐 Socials:
