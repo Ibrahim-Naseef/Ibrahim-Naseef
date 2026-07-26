@@ -5,7 +5,7 @@
 <table>
 <tr>
 <td valign="top"><img src="./avi-ascii.svg" width="370" alt="Ibrahim Naseef — ASCII portrait" /></td>
-<td valign="top"><img src="./info-card.svg" width="490" alt="Ibrahim Naseef — experience, stack, highlights" /></td>
+<!-- <td valign="top"><img src="./info-card.svg" width="490" alt="Ibrahim Naseef — experience, stack, highlights" /></td> -->
 </tr>
 </table>
 

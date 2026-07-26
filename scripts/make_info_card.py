@@ -61,15 +61,15 @@ def build_svg() -> str:
         '<circle cx="20" cy="17" r="6" fill="#ff5f56"/>',
         '<circle cx="40" cy="17" r="6" fill="#ffbd2e"/>',
         '<circle cx="60" cy="17" r="6" fill="#27c93f"/>',
-        f'<text x="{WIDTH/2}" y="21" fill="#8b949e" text-anchor="middle" font-size="12">{TITLE}</text>'
-        f'<text x="{WIDTH - PAD_X}" y="21" fill="#8b949e" text-anchor="end" font-size="12">loading</text>'
-        '<g transform="translate(0,0)">'
-        f'<circle cx="{WIDTH - PAD_X - 18}" cy="17" r="3" fill="#58a6ff" opacity="0.35">'
-        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0s" repeatCount="indefinite"/></circle>'
-        f'<circle cx="{WIDTH - PAD_X - 8}" cy="17" r="3" fill="#58a6ff" opacity="0.35">'
-        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0.2s" repeatCount="indefinite"/></circle>'
-        f'<circle cx="{WIDTH - PAD_X + 2}" cy="17" r="3" fill="#58a6ff" opacity="0.35">'
-        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0.4s" repeatCount="indefinite"/></circle>'
+        f'<text x="{WIDTH/2}" y="21" fill="#8b949e" text-anchor="middle" font-size="12">{TITLE}</text>',
+        f'<text x="{WIDTH - PAD_X}" y="21" fill="#8b949e" text-anchor="end" font-size="12">loading</text>',
+        '<g transform="translate(0,0)">',
+        f'<circle cx="{WIDTH - PAD_X - 18}" cy="17" r="3" fill="#58a6ff" opacity="0.35">',
+        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0s" repeatCount="indefinite"/></circle>',
+        f'<circle cx="{WIDTH - PAD_X - 8}" cy="17" r="3" fill="#58a6ff" opacity="0.35">',
+        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0.2s" repeatCount="indefinite"/></circle>',
+        f'<circle cx="{WIDTH - PAD_X + 2}" cy="17" r="3" fill="#58a6ff" opacity="0.35">',
+        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0.4s" repeatCount="indefinite"/></circle>',
         '</g>',
     ]
 
