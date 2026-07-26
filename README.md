@@ -49,7 +49,6 @@ DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), s
 
 
 <div align="center">
-<a href="https://github.com/ibrahim-naseef">
 <img align="center" height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ibrahim-naseef&layout=compact&theme=dark" alt=ibrahim-naseef />
 <img align="center" height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=ibrahim-naseef&theme=dark" alt="ibrahim-naseef" />
 <img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=ibrahim-naseef&theme=2077" height="180em" />
