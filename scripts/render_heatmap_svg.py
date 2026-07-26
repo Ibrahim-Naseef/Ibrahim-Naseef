@@ -37,9 +37,9 @@ GREEN = "#39d353"
 GOLD = "#f2cc60"
 
 # reveal timing (one-shot)
-COL_T = 0.018   # per-column delay contribution (left -> right sweep)
-ROW_T = 0.045   # per-row delay contribution (top -> bottom cascade)
-CELL_DUR = 0.42
+COL_T = 0.02    # per-column delay inside each row (left -> right typing)
+ROW_T = 1.20    # per-row delay so each row starts after the prior row finishes
+CELL_DUR = 0.12
 
 
 def level_for(count):
