@@ -60,12 +60,8 @@ DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), s
 
 
 
-### ✍️ Random Dev Quote
+### ✍️ Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
-
-
-### 😂 Random Dev Meme
-<img src="https://source.unsplash.com/random/900x400/?programming,meme" alt="Random programming meme" style="max-width:100%;border-radius:16px;" />
 
 
 
