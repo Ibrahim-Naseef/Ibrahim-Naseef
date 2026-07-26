@@ -1,0 +1,9 @@
+requests==2.32.3
+beautifulsoup4==4.12.3
+# portrait-only (not needed by the daily workflow):
+pillow
+numpy
+opencv-python
+# optional, for background removal in prep_photo.py — needs a one-time
+# model download, so it's not required to run the pipeline:
+# rembg
