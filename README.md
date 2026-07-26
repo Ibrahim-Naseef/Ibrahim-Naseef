@@ -1,8 +1,5 @@
-![pxfuel (1)](https://github.com/Ibrahim-Naseef/Ibrahim-Naseef/assets/156147657/897028e3-a418-4ab4-b57e-08f6af6c22a5)
-
 <div align="center">
 
-<h3><code>ibrahim@github ~ $ ./contributions.sh</code></h3>
 <img src="./contrib-heatmap.svg" width="860" />
 
 <br><br>
