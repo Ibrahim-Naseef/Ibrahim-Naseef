@@ -1,12 +1,14 @@
 """
-make_info_card.py
-Hand-authored neofetch-style SVG panel: title bar + colored key/value rows,
-each fading/sliding in on a stagger. Set STATIC=1 to emit a frozen frame
-(useful for local Quick Look previews / thumbnails).
+make_info_card.py — neofetch-style info panel that fades in line by line.
 
 Usage:
     python scripts/make_info_card.py
-    STATIC=1 python scripts/make_info_card.py
+    STATIC=1 python scripts/make_info_card.py   # frozen frame, for local preview
+
+Produces: info-card.svg
+
+Edit the CONTENT block below to change what shows on the card — this is
+the "story numbers can't tell" panel, so keep it to a handful of lines.
 """
 
 import os
@@ -14,33 +16,26 @@ import os
 OUT = "info-card.svg"
 STATIC = os.environ.get("STATIC") == "1"
 
+TITLE = "ibrahim@github"
 WIDTH = 490
-ROW_H = 26
-TITLE_H = 34
-PAD_X = 20
+LINE_H = 26
+PAD_X = 24
+PAD_TOP = 56
 
-BG = "#0d1117"
-BORDER = "#30363d"
-TITLE_BG = "#161b22"
-DOT_RED, DOT_YEL, DOT_GRN = "#ff5f56", "#ffbd2e", "#27c93f"
-KEY_COLOR = "#39d353"      # green, like a shell prompt var
-VAL_COLOR = "#c9d1d9"
-LABEL_COLOR = "#8b949e"
-FONT = "Consolas, Menlo, monospace"
-
-# (label, value) rows — this is the part that tells the story the
-# contribution graph can't: current focus, what's next, stack, highlights.
-ROWS = [
-    ("user", "ibrahim@dev ~ %"),
-    ("Now", "Dental X-Ray Age Prediction (Deep Learning)"),
-    ("Next", "Learning MERN stack"),
-    ("Help wanted", "Java Fullstack"),
-    ("Stack", "Java · Python · JS · React · Django"),
-    ("ML/Data", "TensorFlow · Keras · NumPy · Pandas"),
-    ("Fun fact", "Bugs are part of life."),
+# label, value, accent color for the label
+CONTENT = [
+    ("OS",         "Full-Stack Dev + ML Explorer",     "#58a6ff"),
+    ("Now",        "Dental X-Ray Age Prediction (DL)", "#3fb950"),
+    ("Learning",   "MERN Stack",                        "#3fb950"),
+    ("Looking for","Java Fullstack collaborators",      "#3fb950"),
+    ("Languages",  "Java, Python, JS, C/C++",            "#e3b341"),
+    ("Frontend",   "React, TailwindCSS, HTML5",          "#e3b341"),
+    ("Backend",    "Django, MongoDB, MySQL",             "#e3b341"),
+    ("ML",         "TensorFlow, Keras, NumPy, Pandas",   "#e3b341"),
+    ("Ask me",     "Web, Python, Java",                  "#f778ba"),
 ]
 
-HEIGHT = TITLE_H + len(ROWS) * ROW_H + 20
+HEIGHT = PAD_TOP + LINE_H * len(CONTENT) + 24
 
 
 def escape(s: str) -> str:
@@ -48,71 +43,62 @@ def escape(s: str) -> str:
 
 
 def build_svg() -> str:
-    parts = []
-    parts.append(
-        f'<svg viewBox="0 0 {WIDTH} {HEIGHT}" xmlns="http://www.w3.org/2000/svg" '
-        f'font-family="{FONT}" font-size="13">'
-    )
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {HEIGHT}" '
+        f'font-family="Consolas, Menlo, monospace" font-size="13">',
+        "<defs>",
+        '<clipPath id="cardclip"><rect x="0" y="0" width="' + str(WIDTH) +
+        '" height="' + str(HEIGHT) + '" rx="10"/></clipPath>',
+        "</defs>",
+        f'<g clip-path="url(#cardclip)">',
+        f'<rect width="{WIDTH}" height="{HEIGHT}" fill="#0d1117"/>',
+        f'<rect width="{WIDTH}" height="{HEIGHT}" fill="none" stroke="#30363d" stroke-width="1"/>',
+        # title bar
+        f'<rect x="0" y="0" width="{WIDTH}" height="34" fill="#161b22"/>',
+        '<circle cx="20" cy="17" r="6" fill="#ff5f56"/>',
+        '<circle cx="40" cy="17" r="6" fill="#ffbd2e"/>',
+        '<circle cx="60" cy="17" r="6" fill="#27c93f"/>',
+        f'<text x="{WIDTH/2}" y="21" fill="#8b949e" text-anchor="middle" font-size="12">{TITLE}</text>',
+    ]
 
-    # window chrome
-    parts.append(
-        f'<rect x="0" y="0" width="{WIDTH}" height="{HEIGHT}" rx="8" '
-        f'fill="{BG}" stroke="{BORDER}" stroke-width="1"/>'
-    )
-    parts.append(
-        f'<rect x="0" y="0" width="{WIDTH}" height="{TITLE_H}" rx="8" fill="{TITLE_BG}"/>'
-    )
-    parts.append(f'<rect x="0" y="{TITLE_H-8}" width="{WIDTH}" height="8" fill="{TITLE_BG}"/>')
-    for i, color in enumerate([DOT_RED, DOT_YEL, DOT_GRN]):
-        parts.append(f'<circle cx="{18 + i*18}" cy="{TITLE_H/2:.0f}" r="5" fill="{color}"/>')
-    parts.append(
-        f'<text x="{WIDTH/2:.0f}" y="{TITLE_H/2+4:.0f}" text-anchor="middle" '
-        f'fill="{LABEL_COLOR}" font-size="12">neofetch</text>'
-    )
-
-    fade_dur = 0.35
-    stagger = 0.12
-
-    for i, (label, value) in enumerate(ROWS):
-        y = TITLE_H + 20 + i * ROW_H
-        begin = round(i * stagger, 3)
-        label_esc = escape(label)
-        value_esc = escape(value)
-
-        group_attrs = ""
-        anim = ""
-        if not STATIC:
-            group_attrs = 'opacity="0"'
-            anim = (
-                f'<animate attributeName="opacity" from="0" to="1" '
-                f'begin="{begin}s" dur="{fade_dur}s" fill="freeze"/>'
-                f'<animateTransform attributeName="transform" type="translate" '
-                f'from="-12,0" to="0,0" begin="{begin}s" dur="{fade_dur}s" '
-                f'fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>'
-            )
-
-        parts.append(f'<g {group_attrs}>')
-        parts.append(anim)
-        if i == 0:
-            # first row styled like a shell prompt line, not a key/value pair
-            parts.append(
-                f'<text x="{PAD_X}" y="{y}" fill="{KEY_COLOR}">{value_esc}</text>'
-            )
+    for i, (label, value, color) in enumerate(CONTENT):
+        y = PAD_TOP + i * LINE_H
+        label_txt = escape(label)
+        value_txt = escape(value)
+        line = (
+            f'<tspan fill="{color}" font-weight="bold">{label_txt}</tspan>'
+            f'<tspan fill="#c9d1d9">: {value_txt}</tspan>'
+        )
+        if STATIC:
+            parts.append(f'<text x="{PAD_X}" y="{y}" xml:space="preserve">{line}</text>')
         else:
+            start = 0.4 + i * 0.12
             parts.append(
-                f'<text x="{PAD_X}" y="{y}" fill="{KEY_COLOR}">{label_esc}</text>'
+                f'<g opacity="0" transform="translate(-8,0)">'
+                f'<animate attributeName="opacity" from="0" to="1" begin="{start:.2f}s" '
+                f'dur="0.35s" fill="freeze"/>'
+                f'<animateTransform attributeName="transform" type="translate" '
+                f'from="-8,0" to="0,0" begin="{start:.2f}s" dur="0.35s" fill="freeze"/>'
+                f'<text x="{PAD_X}" y="{y}" xml:space="preserve">{line}</text>'
+                f"</g>"
             )
-            parts.append(
-                f'<text x="{PAD_X + 118}" y="{y}" fill="{VAL_COLOR}">{value_esc}</text>'
-            )
-        parts.append("</g>")
 
-    parts.append("</svg>")
+    # accent divider under the "OS" line to mimic neofetch color swatches
+    swatch_y = HEIGHT - 20
+    colors = ["#f85149", "#3fb950", "#e3b341", "#58a6ff", "#bc8cff", "#39d9d9"]
+    for i, c in enumerate(colors):
+        parts.append(f'<rect x="{PAD_X + i*18}" y="{swatch_y}" width="14" height="14" rx="3" fill="{c}"/>')
+
+    parts.append("</g></svg>")
     return "\n".join(parts)
 
 
-if __name__ == "__main__":
+def main():
     svg = build_svg()
     with open(OUT, "w") as f:
         f.write(svg)
-    print(f"Wrote {OUT} ({'static' if STATIC else 'animated'})")
+    print(f"wrote {OUT}")
+
+
+if __name__ == "__main__":
+    main()

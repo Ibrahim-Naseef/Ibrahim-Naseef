@@ -1,103 +1,115 @@
 """
-fetch_contributions.py
-Scrapes the public contribution calendar HTML fragment GitHub serves at
-https://github.com/users/<username>/contributions — no GraphQL API, no
-personal access token needed. Writes data/contributions.json with raw
-days plus derived stats (current streak, longest streak, best day,
-monthly totals).
+fetch_contributions.py — scrape the public contribution calendar HTML.
+
+No GraphQL API, no personal access token. GitHub serves the calendar
+as a public HTML fragment at:
+
+    https://github.com/users/<username>/contributions
 
 Usage:
-    python scripts/fetch_contributions.py [username]
+    python scripts/fetch_contributions.py
+
+Produces: data/contributions.json
 """
 
-import sys
 import json
-from datetime import date, datetime
+import re
+from datetime import datetime
 
 import requests
 from bs4 import BeautifulSoup
 
-DEFAULT_USERNAME = "Ibrahim-Naseef"
-OUT_PATH = "data/contributions.json"
+USERNAME = "Ibrahim-Naseef"
+URL = f"https://github.com/users/{USERNAME}/contributions"
+OUT = "data/contributions.json"
+
+LEVEL_CLASS_RE = re.compile(r"data-level=\"(\d)\"")
 
 
-def fetch_html(username: str) -> str:
-    url = f"https://github.com/users/{username}/contributions"
-    resp = requests.get(
-        url,
-        headers={"User-Agent": "Mozilla/5.0 (profile-readme-bot)"},
-        timeout=20,
-    )
+def fetch_html() -> str:
+    headers = {"User-Agent": "Mozilla/5.0 (profile-readme-bot)"}
+    resp = requests.get(URL, headers=headers, timeout=15)
     resp.raise_for_status()
     return resp.text
 
 
+COUNT_RE = re.compile(r"^(No|\d[\d,]*)\s+contributions?")
+
+
 def parse_days(html: str) -> list[dict]:
     soup = BeautifulSoup(html, "html.parser")
+
+    # tool-tips hold the human-readable "N contributions on <date>" text,
+    # keyed by the day cell's id via the `for` attribute
+    counts_by_id = {}
+    for tip in soup.select("tool-tip"):
+        target_id = tip.get("for")
+        text = tip.get_text(strip=True)
+        m = COUNT_RE.match(text)
+        if target_id and m:
+            n = 0 if m.group(1) == "No" else int(m.group(1).replace(",", ""))
+            counts_by_id[target_id] = n
+
     days = []
-    # GitHub renders each day as a <td> with class "ContributionCalendar-day"
     for td in soup.select("td.ContributionCalendar-day"):
-        d = td.get("data-date")
+        date = td.get("data-date")
         level = td.get("data-level")
-        if d is None:
+        if date is None or level is None:
             continue
-        days.append({"date": d, "level": int(level) if level is not None else 0})
-    days.sort(key=lambda x: x["date"])
+        cell_id = td.get("id")
+        count = counts_by_id.get(cell_id, None)
+        days.append({"date": date, "level": int(level), "count": count})
+    days.sort(key=lambda d: d["date"])
     return days
 
 
 def derive_stats(days: list[dict]) -> dict:
-    if not days:
-        return {}
-
-    # current streak: walk backwards from most recent day while level > 0
-    current_streak = 0
-    for d in reversed(days):
-        if d["level"] > 0:
-            current_streak += 1
-        else:
-            break
-
-    # longest streak
-    longest_streak = 0
+    total_contributions = sum(d["count"] or 0 for d in days)
+    total = sum(1 for d in days if d["level"] > 0)
+    # current / longest streak based on level > 0 as "contributed"
+    longest = current = 0
     running = 0
+    today = datetime.utcnow().date().isoformat()
     for d in days:
         if d["level"] > 0:
             running += 1
-            longest_streak = max(longest_streak, running)
+            longest = max(longest, running)
         else:
             running = 0
+    # current streak: walk from the end backwards
+    for d in reversed(days):
+        if d["level"] > 0:
+            current += 1
+        else:
+            break
 
-    best_day = max(days, key=lambda x: x["level"])
-    total = sum(1 for d in days if d["level"] > 0)
+    best_day = max(days, key=lambda d: d["level"], default=None)
 
     monthly = {}
     for d in days:
-        month = d["date"][:7]  # YYYY-MM
+        month = d["date"][:7]
         monthly[month] = monthly.get(month, 0) + (1 if d["level"] > 0 else 0)
 
     return {
-        "current_streak": current_streak,
-        "longest_streak": longest_streak,
-        "best_day": best_day["date"],
-        "active_days_last_year": total,
+        "total_contributions": total_contributions,
+        "active_days": total,
+        "current_streak": current,
+        "longest_streak": longest,
+        "best_day": best_day["date"] if best_day else None,
         "monthly_active_days": monthly,
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": today,
     }
 
 
 def main():
-    username = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_USERNAME
-    html = fetch_html(username)
+    html = fetch_html()
     days = parse_days(html)
     stats = derive_stats(days)
+    payload = {"username": USERNAME, "days": days, "stats": stats}
 
-    payload = {"username": username, "days": days, "stats": stats}
-
-    with open(OUT_PATH, "w") as f:
+    with open(OUT, "w") as f:
         json.dump(payload, f, indent=2)
-
-    print(f"Wrote {OUT_PATH}: {len(days)} days, streak={stats.get('current_streak')}")
+    print(f"wrote {OUT} ({len(days)} days)")
 
 
 if __name__ == "__main__":

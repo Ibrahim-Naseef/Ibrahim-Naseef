@@ -1,135 +1,152 @@
 """
-render_heatmap_svg.py
-Renders data/contributions.json as the classic 53-week x 7-day calendar of
-rounded boxes, revealed once with a diagonal slide-down (CSS keyframes,
-no looping), plus a legend and a stats footer line.
+render_heatmap_svg.py — draw data/contributions.json as a 53x7 grid of
+rounded boxes, revealed diagonally, with a legend + stats footer.
 
 Usage:
     python scripts/render_heatmap_svg.py
+
+Produces: contrib-heatmap.svg
 """
 
 import json
 from datetime import datetime, timedelta
 
-DATA_PATH = "data/contributions.json"
+SRC = "data/contributions.json"
 OUT = "contrib-heatmap.svg"
 
-PALETTE = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353", "#69f0a0"]
-# none -> brightest (level 5 is a neon top end, level 0-4 mirror GitHub's own ramp)
+PALETTE = [
+    "#161b22",  # level 0 — none
+    "#0e4429",
+    "#006d32",
+    "#26a641",
+    "#39d353",
+    "#69f0a0",  # level 5 — neon top end (beyond GitHub's usual 4)
+]
 
-CELL = 11
+CELL = 12
 GAP = 3
-LEFT_PAD = 30   # room for day-of-week labels
-TOP_PAD = 20    # room for month labels
-FOOTER_H = 26
-LEGEND_H = 20
+PAD_LEFT = 30
+PAD_TOP = 20
+FOOTER_H = 46
+WEEKDAY_LABELS = ["Mon", "", "Wed", "", "Fri", "", ""]
 
 
 def load_data():
-    with open(DATA_PATH) as f:
+    with open(SRC) as f:
         return json.load(f)
 
 
-def build_grid(days: list[dict]):
-    """Bucket days into a week-major 53x7 grid keyed by (week_index, weekday)."""
+def to_grid(days: list[dict]) -> list[list[dict | None]]:
+    """Bucket the flat day list into 53 week-columns x 7 day-rows,
+    aligned so each column starts on Sunday."""
     if not days:
-        return {}, []
+        return [[None] * 7 for _ in range(53)]
+
     parsed = [
-        {"date": datetime.strptime(d["date"], "%Y-%m-%d"), "level": d["level"]}
+        {**d, "dt": datetime.strptime(d["date"], "%Y-%m-%d")}
         for d in days
     ]
-    parsed.sort(key=lambda x: x["date"])
-    start = parsed[0]["date"]
-    # align to the preceding Sunday so columns are full weeks
-    start -= timedelta(days=(start.weekday() + 1) % 7)
+    parsed.sort(key=lambda d: d["dt"])
 
-    grid = {}
-    month_labels = []  # (week_index, label) for months that start a new column
-    seen_months = set()
+    first = parsed[0]["dt"]
+    first_sunday = first - timedelta(days=(first.weekday() + 1) % 7)
+
+    weeks = 53
+    grid = [[None] * 7 for _ in range(weeks)]
     for d in parsed:
-        delta = (d["date"] - start).days
-        week = delta // 7
-        weekday = delta % 7  # 0=Sun .. 6=Sat
-        grid[(week, weekday)] = d["level"]
-
-        key = (d["date"].year, d["date"].month)
-        if key not in seen_months and d["date"].day <= 7:
-            seen_months.add(key)
-            month_labels.append((week, d["date"].strftime("%b")))
-
-    return grid, month_labels
+        offset_days = (d["dt"] - first_sunday).days
+        week = offset_days // 7
+        weekday = offset_days % 7
+        if 0 <= week < weeks:
+            grid[week][weekday] = d
+    return grid
 
 
 def build_svg(payload: dict) -> str:
-    days = payload["days"]
+    days = payload.get("days", [])
     stats = payload.get("stats", {})
-    grid, month_labels = build_grid(days)
+    grid = to_grid(days)
 
-    weeks = (max(w for w, _ in grid.keys()) + 1) if grid else 53
-    width = LEFT_PAD + weeks * (CELL + GAP)
-    height = TOP_PAD + 7 * (CELL + GAP) + LEGEND_H + FOOTER_H
+    weeks = len(grid)
+    width = PAD_LEFT + weeks * (CELL + GAP)
+    height = PAD_TOP + 7 * (CELL + GAP) + FOOTER_H
 
-    parts = []
-    parts.append(
-        f'<svg viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg" '
-        f'font-family="Consolas, Menlo, monospace" font-size="10">'
-    )
-    parts.append(
-        "<style>"
-        ".cell{opacity:0;animation:reveal .5s ease forwards;}"
-        "@keyframes reveal{to{opacity:1;}}"
-        "</style>"
-    )
-    parts.append(f'<rect width="100%" height="100%" fill="transparent"/>')
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" '
+        f'font-family="Consolas, Menlo, monospace" font-size="11">',
+        f'<rect width="{width}" height="{height}" fill="transparent"/>',
+    ]
 
-    # month labels
-    for week, label in month_labels:
-        x = LEFT_PAD + week * (CELL + GAP)
-        parts.append(f'<text x="{x}" y="{TOP_PAD-6}" fill="#8b949e">{label}</text>')
+    # weekday labels
+    for row, label in enumerate(WEEKDAY_LABELS):
+        if label:
+            y = PAD_TOP + row * (CELL + GAP) + CELL - 2
+            parts.append(f'<text x="0" y="{y}" fill="#8b949e">{label}</text>')
 
-    # day-of-week labels (Mon/Wed/Fri like GitHub's own graph)
-    dow_labels = {1: "Mon", 3: "Wed", 5: "Fri"}
-    for wd, label in dow_labels.items():
-        y = TOP_PAD + wd * (CELL + GAP) + CELL - 1
-        parts.append(f'<text x="0" y="{y}" fill="#8b949e">{label}</text>')
-
-    # cells, diagonal stagger: delay based on week + weekday
-    max_delay_units = weeks + 7
-    for (week, weekday), level in grid.items():
-        x = LEFT_PAD + week * (CELL + GAP)
-        y = TOP_PAD + weekday * (CELL + GAP)
-        color = PALETTE[min(level, len(PALETTE) - 1)]
-        delay = ((week + weekday) / max_delay_units) * 1.6  # spread reveal over ~1.6s
-        parts.append(
-            f'<rect class="cell" x="{x}" y="{y}" width="{CELL}" height="{CELL}" '
-            f'rx="2" fill="{color}" style="animation-delay:{delay:.3f}s"/>'
-        )
+    # cells: row-by-row reveal (line by line, top to bottom) — each of the
+    # 7 day-rows fills in left-to-right across all 53 weeks before the
+    # next row starts
+    row_stagger = 0.35    # seconds before the next row begins
+    cell_stagger = 0.006  # seconds between cells within a row
+    for w, col in enumerate(grid):
+        for r, d in enumerate(col):
+            level = d["level"] if d else 0
+            color = PALETTE[min(level, len(PALETTE) - 1)]
+            x = PAD_LEFT + w * (CELL + GAP)
+            y = PAD_TOP + r * (CELL + GAP)
+            begin = r * row_stagger + w * cell_stagger
+            title = ""
+            if d:
+                count = d.get("count")
+                label = f"{count} contributions" if count is not None else ""
+                title = f'<title>{label} on {d["date"]}</title>'
+            parts.append(
+                f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="2.5" '
+                f'fill="{color}" opacity="0" transform="translate(0,-6)">'
+                f'<animate attributeName="opacity" from="0" to="1" begin="{begin:.3f}s" '
+                f'dur="0.25s" fill="freeze"/>'
+                f'<animateTransform attributeName="transform" type="translate" '
+                f'from="0,-6" to="0,0" begin="{begin:.3f}s" dur="0.25s" fill="freeze"/>'
+                f"{title}</rect>"
+            )
 
     # legend
-    legend_y = TOP_PAD + 7 * (CELL + GAP) + 14
-    parts.append(f'<text x="{LEFT_PAD}" y="{legend_y}" fill="#8b949e">Less</text>')
-    lx = LEFT_PAD + 34
-    for color in PALETTE:
-        parts.append(f'<rect x="{lx}" y="{legend_y-9}" width="{CELL}" height="{CELL}" rx="2" fill="{color}"/>')
+    legend_y = height - FOOTER_H + 14
+    parts.append(f'<text x="{PAD_LEFT}" y="{legend_y}" fill="#8b949e">Less</text>')
+    lx = PAD_LEFT + 40
+    for c in PALETTE:
+        parts.append(f'<rect x="{lx}" y="{legend_y-10}" width="{CELL}" height="{CELL}" rx="2.5" fill="{c}"/>')
         lx += CELL + GAP
     parts.append(f'<text x="{lx+4}" y="{legend_y}" fill="#8b949e">More</text>')
 
-    # stats footer
-    active = stats.get("active_days_last_year", "?")
-    streak = stats.get("current_streak", "?")
-    longest = stats.get("longest_streak", "?")
-    footer = f"{active} active days in the last year  ·  current streak {streak}  ·  longest streak {longest}"
+    # stats footer line
+    total = stats.get("total_contributions")
+    streak = stats.get("current_streak")
+    longest = stats.get("longest_streak")
+    footer_bits = []
+    if total is not None:
+        footer_bits.append(f"{total:,} contributions in the last year")
+    if streak is not None:
+        footer_bits.append(f"current streak: {streak}d")
+    if longest is not None:
+        footer_bits.append(f"longest streak: {longest}d")
+    footer_text = "  ·  ".join(footer_bits) if footer_bits else "no data yet — run fetch_contributions.py"
+
     parts.append(
-        f'<text x="{LEFT_PAD}" y="{height-8}" fill="#c9d1d9" font-size="11">{footer}</text>'
+        f'<text x="{PAD_LEFT}" y="{height-8}" fill="#c9d1d9">{footer_text}</text>'
     )
 
     parts.append("</svg>")
     return "\n".join(parts)
 
 
-if __name__ == "__main__":
+def main():
     payload = load_data()
     svg = build_svg(payload)
     with open(OUT, "w") as f:
         f.write(svg)
-    print(f"Wrote {OUT}")
+    print(f"wrote {OUT}")
+
+
+if __name__ == "__main__":
+    main()

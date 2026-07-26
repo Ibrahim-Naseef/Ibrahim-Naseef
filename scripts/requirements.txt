@@ -4,4 +4,6 @@ beautifulsoup4==4.12.3
 pillow
 numpy
 opencv-python
-rembg
+# optional, for background removal in prep_photo.py — needs a one-time
+# model download, so it's not required to run the pipeline:
+# rembg

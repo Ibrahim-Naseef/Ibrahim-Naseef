@@ -1,49 +1,60 @@
 """
-prep_photo.py
-Run locally (needs rembg, opencv-python, numpy, pillow) whenever the source
-photo changes. Produces `source-prepped.png`, a background-free, contrast-
-boosted grayscale image composited onto pure white — the ideal input for
-make_ascii_svg.py's brightness-to-glyph mapping.
+prep_photo.py — one-time photo prep for the ASCII portrait.
 
 Usage:
-    python scripts/prep_photo.py source-photo.jpg
+    python scripts/prep_photo.py source-photo.png
+
+Produces: source-prepped.png (grayscale, white background, contrast-boosted)
+
+Pipeline:
+  1. (optional) remove the background with rembg, if installed
+  2. boost local contrast with CLAHE so a flat face gets real
+     highlights/shadows
+  3. composite onto pure white so the background maps to the blank
+     end of the ASCII ramp (white -> spaces)
 """
 
 import sys
 import numpy as np
 import cv2
 from PIL import Image
-from rembg import remove
 
 
-def prep(src_path: str, out_path: str = "source-prepped.png") -> None:
-    # 1. Remove the background so only the subject remains
-    with open(src_path, "rb") as f:
-        input_bytes = f.read()
-    cutout_bytes = remove(input_bytes)  # returns PNG bytes with alpha channel
+def remove_background(img: Image.Image) -> Image.Image:
+    """Try rembg if it's installed; otherwise return the image unchanged.
+    A plain, evenly lit background (like a light blue/white studio shot)
+    works fine without this step."""
+    try:
+        from rembg import remove
+        return remove(img).convert("RGBA")
+    except ImportError:
+        print("rembg not installed — skipping background removal "
+              "(fine if your background is already plain/light).")
+        return img.convert("RGBA")
 
-    with open("_cutout_tmp.png", "wb") as f:
-        f.write(cutout_bytes)
 
-    cutout = Image.open("_cutout_tmp.png").convert("RGBA")
-
-    # 2. Composite onto pure white so background maps to the blank end
-    #    of the ASCII ramp (white -> space character)
-    white_bg = Image.new("RGBA", cutout.size, (255, 255, 255, 255))
-    composited = Image.alpha_composite(white_bg, cutout).convert("RGB")
-
-    # 3. Boost local contrast with CLAHE so a flatly-lit face gets real
-    #    highlights and shadows instead of converting to a dark blob
-    gray = cv2.cvtColor(np.array(composited), cv2.COLOR_RGB2GRAY)
+def apply_clahe(gray: np.ndarray) -> np.ndarray:
     clahe = cv2.createCLAHE(clipLimit=2.5, tileGridSize=(8, 8))
-    enhanced = clahe.apply(gray)
+    return clahe.apply(gray)
 
-    Image.fromarray(enhanced).save(out_path)
-    print(f"Wrote {out_path} ({enhanced.shape[1]}x{enhanced.shape[0]})")
+
+def composite_on_white(rgba: Image.Image) -> Image.Image:
+    bg = Image.new("RGBA", rgba.size, (255, 255, 255, 255))
+    return Image.alpha_composite(bg, rgba).convert("RGB")
+
+
+def main(src_path: str, out_path: str = "source-prepped.png"):
+    img = Image.open(src_path)
+    img = remove_background(img)
+    img = composite_on_white(img)
+
+    gray = np.array(img.convert("L"))
+    gray = apply_clahe(gray)
+
+    Image.fromarray(gray).save(out_path)
+    print(f"wrote {out_path}")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python scripts/prep_photo.py <source-photo>")
-        sys.exit(1)
-    prep(sys.argv[1])
+    src = sys.argv[1] if len(sys.argv) > 1 else "source-photo.jpg"
+    main(src)
