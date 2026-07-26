@@ -83,15 +83,16 @@ def build_svg(payload: dict) -> str:
             y = PAD_TOP + row * (CELL + GAP) + CELL - 2
             parts.append(f'<text x="0" y="{y}" fill="#8b949e">{label}</text>')
 
-    # cells: diagonal, line-after-line slide-down reveal, per the doc —
-    # begin offset = week*0.012 + row*0.012
+    # cells: reveal one row at a time, left-to-right within each row.
+    # begin offset = row*0.12
+    row_stagger = 0.12
     for w, col in enumerate(grid):
         for r, d in enumerate(col):
             level = d["level"] if d else 0
             color = PALETTE[min(level, len(PALETTE) - 1)]
             x = PAD_LEFT + w * (CELL + GAP)
             y = PAD_TOP + r * (CELL + GAP)
-            begin = (w + r) * 0.012
+            begin = r * row_stagger
             title = ""
             if d:
                 count = d.get("count")
