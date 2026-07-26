@@ -1,0 +1,43 @@
+<svg viewBox="0 0 490 236" xmlns="http://www.w3.org/2000/svg" font-family="Consolas, Menlo, monospace" font-size="13">
+<rect x="0" y="0" width="490" height="236" rx="8" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+<rect x="0" y="0" width="490" height="34" rx="8" fill="#161b22"/>
+<rect x="0" y="26" width="490" height="8" fill="#161b22"/>
+<circle cx="18" cy="17" r="5" fill="#ff5f56"/>
+<circle cx="36" cy="17" r="5" fill="#ffbd2e"/>
+<circle cx="54" cy="17" r="5" fill="#27c93f"/>
+<text x="245" y="21" text-anchor="middle" fill="#8b949e" font-size="12">neofetch</text>
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" begin="0.0s" dur="0.35s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-12,0" to="0,0" begin="0.0s" dur="0.35s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+<text x="20" y="54" fill="#39d353">ibrahim@dev ~ %</text>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" begin="0.12s" dur="0.35s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-12,0" to="0,0" begin="0.12s" dur="0.35s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+<text x="20" y="80" fill="#39d353">Now</text>
+<text x="138" y="80" fill="#c9d1d9">Dental X-Ray Age Prediction (Deep Learning)</text>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" begin="0.24s" dur="0.35s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-12,0" to="0,0" begin="0.24s" dur="0.35s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+<text x="20" y="106" fill="#39d353">Next</text>
+<text x="138" y="106" fill="#c9d1d9">Learning MERN stack</text>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" begin="0.36s" dur="0.35s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-12,0" to="0,0" begin="0.36s" dur="0.35s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+<text x="20" y="132" fill="#39d353">Help wanted</text>
+<text x="138" y="132" fill="#c9d1d9">Java Fullstack</text>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" begin="0.48s" dur="0.35s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-12,0" to="0,0" begin="0.48s" dur="0.35s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+<text x="20" y="158" fill="#39d353">Stack</text>
+<text x="138" y="158" fill="#c9d1d9">Java · Python · JS · React · Django</text>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" begin="0.6s" dur="0.35s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-12,0" to="0,0" begin="0.6s" dur="0.35s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+<text x="20" y="184" fill="#39d353">ML/Data</text>
+<text x="138" y="184" fill="#c9d1d9">TensorFlow · Keras · NumPy · Pandas</text>
+</g>
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" begin="0.72s" dur="0.35s" fill="freeze"/><animateTransform attributeName="transform" type="translate" from="-12,0" to="0,0" begin="0.72s" dur="0.35s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+<text x="20" y="210" fill="#39d353">Fun fact</text>
+<text x="138" y="210" fill="#c9d1d9">Bugs are part of life.</text>
+</g>
+</svg>
