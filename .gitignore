@@ -1,0 +1,6 @@
+# raw photos — keep these local, only the generated SVG belongs in the repo
+source-photo.*
+source-prepped.png
+
+.venv/
+__pycache__/
