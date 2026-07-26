@@ -65,7 +65,8 @@ DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), s
 
 
 ### 😂 Random Dev Meme
-<img src="https://c.tenor.com/Uz5bT2FiZKsAAAAd/programming-meme.gif" style="max-width:100%;border-radius:16px;" alt="Programming meme" />
+<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" alt="Programming meme" style="max-width:100%;border-radius:16px;" />
+
 
 ## Total Views
 ![Profile views](https://komarev.com/ghpvc/?username=ibrahim-naseef&style=flat-square&color=blue)
