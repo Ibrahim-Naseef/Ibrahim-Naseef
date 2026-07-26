@@ -49,16 +49,13 @@ DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), s
 
 
 # 📊 GitHub Stats:
-# 📊 GitHub Snapshot
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=ibrahim-naseef&show_icons=true&theme=dark&count_private=true&hide_border=true" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ibrahim-naseef&layout=compact&theme=dark&hide_border=true&langs_count=8" alt="Top Languages" />
-</div>
-
-<div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com?user=ibrahim-naseef&theme=dark&hide_border=true&date_format=%5BY-%5Dm-%5Bd%5D" alt="GitHub Streak" />
-  <img src="https://activity-graph.herokuapp.com/graph?username=ibrahim-naseef&theme=dark&hide_border=true&area=true" alt="Contribution Graph" />
+<img align="center" height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=ibrahim-naseef&theme=dark" alt="ibrahim-naseef" />
+<img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/stats?username=ibrahim-naseef&theme=2077" height="180em" />
+<img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=ibrahim-naseef&theme=2077" height="180em" />
+<img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=ibrahim-naseef&theme=2077" height="180em" />
+<img align="center" src="http://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=ibrahim-naseef&theme=2077" height="180em" />
 </div>
 
 
