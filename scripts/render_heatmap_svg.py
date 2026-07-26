@@ -37,8 +37,8 @@ GREEN = "#39d353"
 GOLD = "#f2cc60"
 
 # reveal timing (one-shot)
-COL_T = 0.02    # per-cell delay within a row (left -> right typing)
-ROW_T = 0.55    # per-row delay (top -> bottom line-by-line)
+COL_T = 0.018   # per-column delay contribution (left -> right sweep)
+ROW_T = 0.045   # per-row delay contribution (top -> bottom cascade)
 CELL_DUR = 0.42
 
 
@@ -138,17 +138,15 @@ def render(data):
         y = grid_top + wi * STEP + CELL * 0.78
         parts.append(f'<text x="{PAD}" y="{y:.1f}" fill="{MUTED}" font-size="9">{wname}</text>')
 
-    # the boxes -- each a rounded rect, row-by-row typing reveal (once, freeze)
-    for ri in range(7):
-        gy = grid_top + ri * STEP
-        row_delay = ri * ROW_T
-        for ci, column in enumerate(grid):
-            cell = column[ri]
+    # the boxes -- each a rounded rect, diagonal slide-down reveal (once, freeze)
+    for ci, column in enumerate(grid):
+        gx = grid_left + ci * STEP
+        for ri, cell in enumerate(column):
             if cell is None:
                 continue
             date_s, count, lvl = cell
-            gx = grid_left + ci * STEP
-            delay = row_delay + ci * COL_T
+            gy = grid_top + ri * STEP
+            delay = ci * COL_T + ri * ROW_T
             plural = "s" if count != 1 else ""
             parts.append(
                 f'<rect class="c" x="{gx}" y="{gy}" width="{CELL}" height="{CELL}" rx="2.5" '
