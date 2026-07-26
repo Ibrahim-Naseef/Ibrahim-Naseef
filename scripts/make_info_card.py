@@ -3,7 +3,7 @@ make_info_card.py — neofetch-style info panel that fades in line by line.
 
 Usage:
     python scripts/make_info_card.py
-    STATIC=1 python scripts/make_info_card.py   # frozen frame, for local preview
+    STATIC=0 python scripts/make_info_card.py   # explicit animation mode if needed
 
 Produces: info-card.svg
 
@@ -14,7 +14,7 @@ the "story numbers can't tell" panel, so keep it to a handful of lines.
 import os
 
 OUT = "info-card.svg"
-STATIC = os.environ.get("STATIC") == "1"
+STATIC = os.environ.get("STATIC", "0") == "1"
 
 TITLE = "ibrahim@devops"
 WIDTH = 490
@@ -32,7 +32,7 @@ CONTENT = [
     ("Containers",   "Docker",                                "#e3b341"),
     ("Scripting",    "Python, Linux Shell",                   "#e3b341"),
     ("Database",     "MySQL",                                  "#e3b341"),
-    ("Certs",        "AWS SAA · Azure AZ-900 · AZ-204",        "#f778ba"),
+    ("Certifications",        "AWS SAA · Azure AZ-900 · AZ-204",        "#f778ba"),
 ]
 
 
@@ -45,7 +45,9 @@ def escape(s: str) -> str:
 
 def build_svg() -> str:
     parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {HEIGHT}" '
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
+        f'viewBox="0 0 {WIDTH} {HEIGHT}" preserveAspectRatio="xMidYMid meet" '
         f'font-family="Consolas, Menlo, monospace" font-size="13">',
         "<defs>",
         '<clipPath id="cardclip"><rect x="0" y="0" width="' + str(WIDTH) +
@@ -59,7 +61,16 @@ def build_svg() -> str:
         '<circle cx="20" cy="17" r="6" fill="#ff5f56"/>',
         '<circle cx="40" cy="17" r="6" fill="#ffbd2e"/>',
         '<circle cx="60" cy="17" r="6" fill="#27c93f"/>',
-        f'<text x="{WIDTH/2}" y="21" fill="#8b949e" text-anchor="middle" font-size="12">{TITLE}</text>',
+        f'<text x="{WIDTH/2}" y="21" fill="#8b949e" text-anchor="middle" font-size="12">{TITLE}</text>'
+        f'<text x="{WIDTH - PAD_X}" y="21" fill="#8b949e" text-anchor="end" font-size="12">loading</text>'
+        '<g transform="translate(0,0)">'
+        f'<circle cx="{WIDTH - PAD_X - 18}" cy="17" r="3" fill="#58a6ff" opacity="0.35">'
+        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0s" repeatCount="indefinite"/></circle>'
+        f'<circle cx="{WIDTH - PAD_X - 8}" cy="17" r="3" fill="#58a6ff" opacity="0.35">'
+        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0.2s" repeatCount="indefinite"/></circle>'
+        f'<circle cx="{WIDTH - PAD_X + 2}" cy="17" r="3" fill="#58a6ff" opacity="0.35">'
+        f'<animate attributeName="opacity" values="0.35;1;0.35" dur="1.0s" begin="0.4s" repeatCount="indefinite"/></circle>'
+        '</g>',
     ]
 
     for i, (label, value, color) in enumerate(CONTENT):
@@ -96,7 +107,7 @@ def build_svg() -> str:
 
 def main():
     svg = build_svg()
-    with open(OUT, "w") as f:
+    with open(OUT, "w", encoding="utf-8") as f:
         f.write(svg)
     print(f"wrote {OUT}")
 
