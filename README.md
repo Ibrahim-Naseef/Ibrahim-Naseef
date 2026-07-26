@@ -2,56 +2,6 @@
 
 <h1 align="center">Hi 👋, I'm <span style="color: #00FF00;">Ibrahim Naseef</span></h1>
 
-
-<div align="center">
-
-<h3><code>ibrahim@github ~ $ ./contributions.sh</code></h3>
-<img src="./contrib-heatmap.svg" width="860" />
-
-<br><br>
-
-<h3><code>ibrahim@github ~ $ whoami</code></h3>
-<table>
-  <tr>
-    <td valign="top"><img src="./avi-ascii.svg" width="370" /></td>
-    <td valign="top"><img src="./info-card.svg" width="490" /></td>
-  </tr>
-</table>
-
-<br>
-
-### 🌐 Socials
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/Nas-eef)
-[![Gmail](https://img.shields.io/badge/Gmail-D14836.svg?logo=gmail&logoColor=white)](mailto:ibrahimnaseef19@gmail.com)
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0.svg?logo=telegram&logoColor=white)](https://t.me/player_1235)
-[![Instagram](https://img.shields.io/badge/Instagram-E4405F.svg?logo=instagram&logoColor=white)](https://www.instagram.com/silentkiller9211/)
-
-### 💻 Tech Stack
-
-![C](https://img.shields.io/badge/c-00599C.svg?style=for-the-badge&logo=c&logoColor=white)
-![C++](https://img.shields.io/badge/c++-00599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![Java](https://img.shields.io/badge/java-ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![React](https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-38B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-4ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-![MySQL](https://img.shields.io/badge/mysql-00000f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![Django](https://img.shields.io/badge/django-092E20.svg?style=for-the-badge&logo=django&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
-![Keras](https://img.shields.io/badge/Keras-D00000.svg?style=for-the-badge&logo=Keras&logoColor=white)
-![NumPy](https://img.shields.io/badge/numpy-013243.svg?style=for-the-badge&logo=numpy&logoColor=white)
-![Pandas](https://img.shields.io/badge/pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
-![Figma](https://img.shields.io/badge/figma-F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
-
-<br>
-
-![Visitors](https://visitcount.itsvg.in/api?id=Ibrahim-naseef&icon=0&color=0)
-
-</div>
-
 # 💫 About Me:
 🔭 I’m currently working on Dental X-Ray Age Prediction using Deep Learning<br>🤝 I’m looking for help with Java Fullstack<br>🌱 I’m currently learning MERN stack<br>💬 Ask me about Web, Python, Java<br>⚡ Fun fact: Bugs are part of life.
 
