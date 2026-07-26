@@ -1,18 +1,3 @@
-<div align="center">
-
-<h3><code>ibrahim@devops ~ $ whoami</code></h3>
-<table>
-  <tr>
-    <td valign="top"><img src="./ibrahim-ascii.svg" width="370" /></td>
-    <td valign="top"><img src="./info-card.svg" width="490" /></td>
-  </tr>
-</table>
-
-<br>
-
-<h3><code>ibrahim@devops ~ $ ./socials.sh</code></h3>
-
-
 <h1 align="center">Hi 👋, I'm <span style="color: #00FF00;">Ibrahim Naseef</span></h1>
 
 # 💫 About Me:
