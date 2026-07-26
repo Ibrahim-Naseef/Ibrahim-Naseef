@@ -65,7 +65,8 @@ DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), s
 
 
 ### 😂 Random Dev Meme
-<img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" alt="Programming meme" style="max-width:100%;border-radius:16px;" />
+<img src="https://source.unsplash.com/random/900x400/?programming,meme" alt="Random programming meme" style="max-width:100%;border-radius:16px;" />
+
 
 
 ## Total Views
