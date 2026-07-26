@@ -1,6 +1,0 @@
-pillow
-numpy
-opencv-python
-# optional, for background removal in prep_photo.py — needs a one-time
-# model download, so it's not required to run the pipeline:
-# rembg
