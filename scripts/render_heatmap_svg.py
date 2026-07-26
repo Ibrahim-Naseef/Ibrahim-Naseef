@@ -138,8 +138,8 @@ def render(data):
 
     css = f"""
 @keyframes cell {{
-  0%   {{ opacity: 0; transform: translateY(-6px); }}
-  100% {{ opacity: 1; transform: translateY(0); }}
+  0%   {{ opacity: 0; }}
+  100% {{ opacity: 1; }}
 }}
 .c {{ opacity: 0; animation: cell {CELL_DUR:.2f}s cubic-bezier(.2,.8,.2,1) both; }}
 """.strip()
@@ -173,15 +173,17 @@ def render(data):
         y = grid_top + wi * STEP + CELL * 0.78
         parts.append(f'<text x="{PAD}" y="{y:.1f}" fill="{MUTED}" font-size="9">{wname}</text>')
 
-    # the boxes -- each a rounded rect, diagonal slide-down reveal (once, freeze)
-    for ci, column in enumerate(grid):
-        gx = grid_left + ci * STEP
-        for ri, cell in enumerate(column):
+    # the boxes -- each a rounded rect, row-by-row reveal (once, freeze)
+    for ri in range(7):
+        gy = grid_top + ri * STEP
+        row_delay = ri * ROW_T
+        for ci, column in enumerate(grid):
+            cell = column[ri]
             if cell is None:
                 continue
             date_s, count, lvl = cell
-            gy = grid_top + ri * STEP
-            delay = ci * COL_T + ri * ROW_T
+            gx = grid_left + ci * STEP
+            delay = row_delay + ci * COL_T
             plural = "s" if count != 1 else ""
             parts.append(
                 f'<rect class="c" x="{gx}" y="{gy}" width="{CELL}" height="{CELL}" rx="2.5" '
