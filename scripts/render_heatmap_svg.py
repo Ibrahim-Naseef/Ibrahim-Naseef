@@ -77,6 +77,41 @@ def build_grid(days):
     return grid
 
 
+def derive_stats(data):
+    days = sorted(data.get("days", []), key=lambda d: d["date"])
+    total = sum((d.get("count") or 0) for d in days)
+    current = 0
+    longest = 0
+    run = 0
+    for d in days:
+        if (d.get("count") or 0) > 0:
+            run += 1
+            longest = max(longest, run)
+        else:
+            run = 0
+    current = 0
+    for d in reversed(days):
+        if (d.get("count") or 0) > 0:
+            current += 1
+        else:
+            break
+    best = None
+    if days:
+        best = max(days, key=lambda d: d.get("count") or 0)
+    data.setdefault("total_contributions", total)
+    data.setdefault("range", {
+        "start": days[0]["date"] if days else "",
+        "end": days[-1]["date"] if days else ""
+    })
+    data.setdefault("best_day", {
+        "date": best["date"] if best else "",
+        "count": best.get("count", 0) if best else 0
+    })
+    data.setdefault("current_streak", {"length": current})
+    data.setdefault("longest_streak", {"length": longest})
+    return data
+
+
 def render(data):
     days = data["days"]
     grid = build_grid(days)
@@ -194,6 +229,7 @@ def render(data):
 
 if __name__ == "__main__":
     data = json.load(open(IN_PATH))
+    data = derive_stats(data)
     svg = render(data)
     with open(OUT_PATH, "w") as f:
         f.write(svg)
