@@ -37,8 +37,8 @@ GREEN = "#39d353"
 GOLD = "#f2cc60"
 
 # reveal timing (one-shot)
-COL_T = 0.02    # per-column delay inside each row (left -> right typing)
-ROW_T = 1.20    # per-row delay so each row starts after the prior row finishes
+COL_T = 0.0     # no per-column delay, to keep each row aligned
+ROW_T = 0.18    # per-row delay so rows appear one after the other
 CELL_DUR = 0.12
 
 
