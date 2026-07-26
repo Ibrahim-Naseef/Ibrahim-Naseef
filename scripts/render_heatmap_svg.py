@@ -83,16 +83,17 @@ def build_svg(payload: dict) -> str:
             y = PAD_TOP + row * (CELL + GAP) + CELL - 2
             parts.append(f'<text x="0" y="{y}" fill="#8b949e">{label}</text>')
 
-    # cells: reveal one row at a time, left-to-right within each row.
-    # begin offset = row*0.12
-    row_stagger = 0.12
+    # cells: type each row left-to-right, then move to the next row.
+    # begin = row_start + column_offset
+    row_stagger = 0.8
+    cell_stagger = 0.02
     for w, col in enumerate(grid):
         for r, d in enumerate(col):
             level = d["level"] if d else 0
             color = PALETTE[min(level, len(PALETTE) - 1)]
             x = PAD_LEFT + w * (CELL + GAP)
             y = PAD_TOP + r * (CELL + GAP)
-            begin = r * row_stagger
+            begin = r * row_stagger + w * cell_stagger
             title = ""
             if d:
                 count = d.get("count")
@@ -100,11 +101,9 @@ def build_svg(payload: dict) -> str:
                 title = f'<title>{label} on {d["date"]}</title>'
             parts.append(
                 f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" rx="2.5" '
-                f'fill="{color}" opacity="0" transform="translate(0,-6)">'
+                f'fill="{color}" opacity="0">'
                 f'<animate attributeName="opacity" from="0" to="1" begin="{begin:.3f}s" '
-                f'dur="0.25s" fill="freeze"/>'
-                f'<animateTransform attributeName="transform" type="translate" '
-                f'from="0,-6" to="0,0" begin="{begin:.3f}s" dur="0.25s" fill="freeze"/>'
+                f'dur="0.12s" fill="freeze"/>'
                 f"{title}</rect>"
             )
 
