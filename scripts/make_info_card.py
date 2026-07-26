@@ -75,7 +75,7 @@ def build_svg() -> str:
         else:
             start = 0.4 + i * 0.12
             parts.append(
-                f'<g opacity="0" transform="translate(-8,0)">'
+                f'<g opacity="1" transform="translate(0,0)">'
                 f'<animate attributeName="opacity" from="0" to="1" begin="{start:.2f}s" '
                 f'dur="0.35s" fill="freeze"/>'
                 f'<animateTransform attributeName="transform" type="translate" '
