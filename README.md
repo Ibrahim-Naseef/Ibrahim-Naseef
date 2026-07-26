@@ -1,3 +1,18 @@
+<div align="center">
+
+<h3><code>ibrahim@devops ~ $ whoami</code></h3>
+<table>
+  <tr>
+    <td valign="top"><img src="./ibrahim-ascii.svg" width="370" /></td>
+    <td valign="top"><img src="./info-card.svg" width="490" /></td>
+  </tr>
+</table>
+
+
+<br>
+
+<h3><code>ibrahim@devops ~ $ ./socials.sh</code></h3>
+
 ![pxfuel (1)](https://github.com/Ibrahim-Naseef/Ibrahim-Naseef/assets/156147657/897028e3-a418-4ab4-b57e-08f6af6c22a5)
 
 
