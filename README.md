@@ -33,42 +33,27 @@ DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), b
 [![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?logo=vercel&logoColor=white)](https://ibrahim-naseef.vercel.app)
 
 # 💻 Tech Stack
+ 
+**CI/CD, Cloud & Containers**
+ 
+<img src="https://skillicons.dev/icons?i=git,githubactions,jenkins,aws,azure,terraform,docker,kubernetes,linux,bash&perline=10" />
+<br>
 
-**CI/CD & Version Control**
-![Azure DevOps](https://img.shields.io/badge/Azure_DevOps-%230078D7?style=for-the-badge&logo=azuredevops&logoColor=white)
-![Jenkins](https://img.shields.io/badge/Jenkins-%23D24939?style=for-the-badge&logo=jenkins&logoColor=white)
-![Git](https://img.shields.io/badge/Git-%23F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-%232088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+**Scripting, Data & Observability**
+ 
+<img src="https://skillicons.dev/icons?i=python,mysql,redis,grafana,prometheus&perline=5" />
+<br>
 
-**Cloud & IaC**
-![AWS](https://img.shields.io/badge/AWS-%23FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-%235C4EE5?style=for-the-badge&logo=terraform&logoColor=white)
+**DevSecOps & GitOps**
+ 
+![SonarQube](https://img.shields.io/badge/SonarQube-%234E9BCD?style=for-the-badge&logo=sonarqube&logoColor=white)&nbsp;&nbsp;
+![Checkmarx](https://img.shields.io/badge/Checkmarx-%2354B848?style=for-the-badge&logo=checkmarx&logoColor=white)&nbsp;&nbsp;
+![Trivy](https://img.shields.io/badge/Trivy-%231904DA?style=for-the-badge&logo=aquasecurity&logoColor=white)&nbsp;&nbsp;
+![OWASP](https://img.shields.io/badge/OWASP-%23000000?style=for-the-badge&logo=owasp&logoColor=white)&nbsp;&nbsp;
+![ArgoCD](https://img.shields.io/badge/ArgoCD-%23EF7B4D?style=for-the-badge&logo=argo&logoColor=white)&nbsp;&nbsp;
+![Helm](https://img.shields.io/badge/Helm-%230F1689?style=for-the-badge&logo=helm&logoColor=white)&nbsp;&nbsp;
+![Amazon EKS](https://img.shields.io/badge/Amazon_EKS-%23FF9900?style=for-the-badge&logo=amazoneks&logoColor=white)&nbsp;&nbsp;
 ![AWS CDK](https://img.shields.io/badge/AWS_CDK-%23FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
-
-**Containers & Orchestration**
-![Docker](https://img.shields.io/badge/Docker-%230db7ed?style=for-the-badge&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-%23326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
-![Amazon EKS](https://img.shields.io/badge/Amazon_EKS-%23FF9900?style=for-the-badge&logo=amazoneks&logoColor=white)
-![Helm](https://img.shields.io/badge/Helm-%230F1689?style=for-the-badge&logo=helm&logoColor=white)
-![ArgoCD](https://img.shields.io/badge/ArgoCD-%23EF7B4D?style=for-the-badge&logo=argo&logoColor=white)
-
-**DevSecOps & Code Quality**
-![SonarQube](https://img.shields.io/badge/SonarQube-%234E9BCD?style=for-the-badge&logo=sonarqube&logoColor=white)
-![Checkmarx](https://img.shields.io/badge/Checkmarx-%2354B848?style=for-the-badge&logo=checkmarx&logoColor=white)
-![Trivy](https://img.shields.io/badge/Trivy-%231904DA?style=for-the-badge&logo=aquasecurity&logoColor=white)
-![OWASP](https://img.shields.io/badge/OWASP-%23000000?style=for-the-badge&logo=owasp&logoColor=white)
-
-**Observability**
-![Prometheus](https://img.shields.io/badge/Prometheus-%23E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
-![Grafana](https://img.shields.io/badge/Grafana-%23F46800?style=for-the-badge&logo=grafana&logoColor=white)
-
-**Scripting, Databases & Caching**
-![Python](https://img.shields.io/badge/Python-%2314354A?style=for-the-badge&logo=python&logoColor=white)
-![Bash](https://img.shields.io/badge/Bash-%234EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-%234479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-%23DC382D?style=for-the-badge&logo=redis&logoColor=white)
-
-
 # 📊 GitHub Stats
 
 <div align="center">
