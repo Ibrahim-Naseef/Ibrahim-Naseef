@@ -13,42 +13,63 @@
 <br>
 
 <h1 align="center">Hi 👋, I'm <span style="color: #00FF00;">Ibrahim Naseef</span></h1>
+<h3 align="center">DevOps Engineer | Cloud & CI/CD Automation | DevSecOps | Exploring Agentic AI</h3>
+
 </div>
 
 # 💫 About Me
-DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), specializing in Azure DevOps, AWS, Jenkins, Terraform, Docker, and Python. I build reliable CI/CD pipelines, automate cloud and infrastructure workflows, and improve release velocity with secure, repeatable delivery.
+DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), building enterprise CI/CD platforms, automating multi-cloud infrastructure, and embedding security directly into developer workflows on Azure DevOps, AWS, and Jenkins.
 
-- Experienced in enterprise DevOps, pipeline governance, and deployment automation
-- Skilled in cloud automation, infrastructure as code, and container orchestration
-- Currently exploring Agentic AI to build smarter automation and operational tooling
-
+- 🔧 Engineered a centralized CI/CD blueprint repository on Azure DevOps, standardizing templates across 12+ enterprise repos and cutting setup time by 40%
+- 🔐 Integrated DevSecOps quality gates (SonarQube, Checkmarx, Checkov) into pipelines, restricting scans to PR-changed files to reduce scan time by 60%
+- ☁️ Automate infrastructure delivery with AWS CDK, Terraform, and hybrid Azure DevOps → Jenkins pipelines across multi-environment AWS deployments
+- 🐳 Building end-to-end GitOps pipelines with Docker, Kubernetes (EKS), ArgoCD, Trivy, and Helm-based observability (Prometheus + Grafana)
+- 🤖 Currently exploring Agentic AI to build smarter automation and operational tooling
+- 🏆 AWS Certified DevOps Engineer – Professional | AWS Certified Solutions Architect – Associate | Microsoft Certified: Azure Developer Associate (AZ-204)
 
 # 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/Nas-eef)
 [![Gmail](https://img.shields.io/badge/Gmail-%23D14836.svg?logo=gmail&logoColor=white)](mailto:ibrahimnaseef19@gmail.com)
-[![Telegram](https://img.shields.io/badge/Telegram-%232CA5E0.svg?logo=telegram&logoColor=white)](https://t.me/player_1235)
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=instagram&logoColor=white)](https://www.instagram.com/silentkiller9211/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-%23000000.svg?logo=vercel&logoColor=white)](https://ibrahim-naseef.vercel.app)
 
+# 💻 Tech Stack
 
-# 💻 Tech Stack:
-![Java](https://img.shields.io/badge/Java-%23ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Python](https://img.shields.io/badge/Python-%2314354A?style=for-the-badge&logo=python&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-%23E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-%230db7ed?style=for-the-badge&logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-%23FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+**CI/CD & Version Control**
+![Azure DevOps](https://img.shields.io/badge/Azure_DevOps-%230078D7?style=for-the-badge&logo=azuredevops&logoColor=white)
 ![Jenkins](https://img.shields.io/badge/Jenkins-%23D24939?style=for-the-badge&logo=jenkins&logoColor=white)
-![Terraform](https://img.shields.io/badge/Terraform-%235C4EE5?style=for-the-badge&logo=terraform&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-%23F05032?style=for-the-badge&logo=git&logoColor=white)
-![Django](https://img.shields.io/badge/Django-%23092E20?style=for-the-badge&logo=django&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-%23013243?style=for-the-badge&logo=numpy&logoColor=white)
-![Keras](https://img.shields.io/badge/Keras-%23D00000?style=for-the-badge&logo=keras&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
-![Netlify](https://img.shields.io/badge/Netlify-%23000000?style=for-the-badge&logo=netlify&logoColor=%2300C7B7)
-![Vercel](https://img.shields.io/badge/Vercel-%23000000?style=for-the-badge&logo=vercel&logoColor=white)
-![Canva](https://img.shields.io/badge/Canva-%2300C4CC?style=for-the-badge&logo=canva&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-%232088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+
+**Cloud & IaC**
+![AWS](https://img.shields.io/badge/AWS-%23FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-%235C4EE5?style=for-the-badge&logo=terraform&logoColor=white)
+![AWS CDK](https://img.shields.io/badge/AWS_CDK-%23FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+
+**Containers & Orchestration**
+![Docker](https://img.shields.io/badge/Docker-%230db7ed?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-%23326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![Amazon EKS](https://img.shields.io/badge/Amazon_EKS-%23FF9900?style=for-the-badge&logo=amazoneks&logoColor=white)
+![Helm](https://img.shields.io/badge/Helm-%230F1689?style=for-the-badge&logo=helm&logoColor=white)
+![ArgoCD](https://img.shields.io/badge/ArgoCD-%23EF7B4D?style=for-the-badge&logo=argo&logoColor=white)
+
+**DevSecOps & Code Quality**
+![SonarQube](https://img.shields.io/badge/SonarQube-%234E9BCD?style=for-the-badge&logo=sonarqube&logoColor=white)
+![Checkmarx](https://img.shields.io/badge/Checkmarx-%2354B848?style=for-the-badge&logo=checkmarx&logoColor=white)
+![Trivy](https://img.shields.io/badge/Trivy-%231904DA?style=for-the-badge&logo=aquasecurity&logoColor=white)
+![OWASP](https://img.shields.io/badge/OWASP-%23000000?style=for-the-badge&logo=owasp&logoColor=white)
+
+**Observability**
+![Prometheus](https://img.shields.io/badge/Prometheus-%23E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-%23F46800?style=for-the-badge&logo=grafana&logoColor=white)
+
+**Scripting, Databases & Caching**
+![Python](https://img.shields.io/badge/Python-%2314354A?style=for-the-badge&logo=python&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-%234EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-%234479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-%23DC382D?style=for-the-badge&logo=redis&logoColor=white)
 
 
-# 📊 GitHub Stats:
+# 📊 GitHub Stats
 
 <div align="center">
 <img align="center" height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=ibrahim-naseef&theme=dark" alt="ibrahim-naseef" />
@@ -59,10 +80,8 @@ DevOps Engineer with 2 years of experience at Tata Consultancy Services (TCS), s
 </div>
 
 
-
 ### ✍️ Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
-
 
 
 ## Total Views
